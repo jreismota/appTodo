@@ -7,8 +7,11 @@ package br.edu.unipam.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -17,11 +20,18 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Tarefa extends AbstractEntity implements Serializable {
 
+    @NotNull
+    @Size(min = 5, max = 100)
+    @Column(name = "DescricaoTarefa")
     private String Descricao;
+    
+    @NotNull
     private LocalDate DataPrevista;
+    
     private LocalDate DataTermino;
     
     @ManyToOne
+    @NotNull
     private Usuario usuario;
 
     public Usuario getUsuario() {

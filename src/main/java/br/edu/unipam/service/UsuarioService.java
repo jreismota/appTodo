@@ -59,4 +59,6 @@ public class UsuarioService {
         //return entityManager.createQuery("select u from Usuario u order by u.nome", Usuario.class).getResultList();
         return entityManager.createNamedQuery(Usuario.GET_ALL_USERS, Usuario.class).getResultList();
     }
+    
+    //ToDo: Salvar usuario
 }

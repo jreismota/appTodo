@@ -17,8 +17,10 @@ import javax.transaction.Transactional;
 /**
  *
  * @author josereis
+ * ACID - Atomicidade / Consistência / Isolamento / Durabilidade
+ * Se der erro, rollback na transação; senão commit
  */
-
+@Transactional
 public class TarefaService {
 
     @PersistenceContext(name = "pu_todo")
