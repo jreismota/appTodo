@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTarefaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_usuario}" for="usuario" />
+                    <h:selectOneMenu id="usuario" value="#{tarefaController.selected.usuario}" title="#{bundle.EditTarefaTitle_usuario}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_descricao}" for="descricao" />
+                    <h:inputText id="descricao" value="#{tarefaController.selected.descricao}" title="#{bundle.EditTarefaTitle_descricao}" />
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_dataPrevista}" for="dataPrevista" />
+                    <h:inputText id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.EditTarefaTitle_dataPrevista}" />
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_dataTermino}" for="dataTermino" />
+                    <h:inputText id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.EditTarefaTitle_dataTermino}" />
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_dataCriacao}" for="dataCriacao" />
+                    <h:inputText id="dataCriacao" value="#{tarefaController.selected.dataCriacao}" title="#{bundle.EditTarefaTitle_dataCriacao}" />
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_dataAlteracao}" for="dataAlteracao" />
+                    <h:inputText id="dataAlteracao" value="#{tarefaController.selected.dataAlteracao}" title="#{bundle.EditTarefaTitle_dataAlteracao}" />
+                    <h:outputLabel value="#{bundle.EditTarefaLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.EditTarefaTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{tarefaController.update}" value="#{bundle.EditTarefaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTarefaViewLink}"/>
+                <br />
+                <h:commandLink action="#{tarefaController.prepareList}" value="#{bundle.EditTarefaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTarefaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

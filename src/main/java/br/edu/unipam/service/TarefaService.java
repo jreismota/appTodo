@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
  *
  * @author josereis
  * ACID - Atomicidade / Consistência / Isolamento / Durabilidade
- * Se der erro, rollback na transação; senão commit
+ * Se der erro, rollback na transação; senão
  */
 @Transactional
 public class TarefaService {

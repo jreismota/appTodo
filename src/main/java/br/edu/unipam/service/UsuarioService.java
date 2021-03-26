@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
  *
  * @author josereis
  */
-
+@Transactional
 public class UsuarioService {
 
     @PersistenceContext(name = "pu_todo")

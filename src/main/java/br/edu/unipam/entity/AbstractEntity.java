@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @MappedSuperclass
 public abstract class AbstractEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     public Date getDataCriacao() {
@@ -39,10 +39,10 @@ public abstract class AbstractEntity {
         this.DataAlteracao = DataAlteracao;
     }
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date DataCriacao;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIME)
     protected Date DataAlteracao;
 
     public Long getId() {

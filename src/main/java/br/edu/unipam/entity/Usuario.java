@@ -8,6 +8,7 @@ package br.edu.unipam.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,22 +28,18 @@ import javax.validation.constraints.Pattern;
 public class Usuario extends AbstractEntity {
 
     public static final String GET_ALL_USERS = "Usuario.getAllUsers";
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @NotNull
-    @NotEmpty
+
     private String nome;
     
     @NotEmpty
     @NotNull
     @Pattern(regexp = "/^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i")
+    @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "usuario")
-    private Collection<Tarefa> tarefas;
+    @OneToMany
+        //(mappedBy = "usuario")
+    private Collection<Tarefa> tarefas = new ArrayList<>();
     
     public String getNome() {
         return nome;
