@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -40,9 +41,10 @@ public abstract class AbstractEntity {
     }
     
     @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
     protected Date DataCriacao;
     
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date DataAlteracao;
 
     public Long getId() {

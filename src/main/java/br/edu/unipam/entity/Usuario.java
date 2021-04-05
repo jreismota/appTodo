@@ -25,7 +25,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQuery(name =  Usuario.GET_ALL_USERS, query = "select u from Usuario u order by u.nome")
-public class Usuario extends AbstractEntity {
+public class Usuario extends AbstractEntity implements Serializable {
 
     public static final String GET_ALL_USERS = "Usuario.getAllUsers";
 
@@ -33,12 +33,11 @@ public class Usuario extends AbstractEntity {
     
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "/^[a-z0-9.]+@[a-z0-9]+\\.[a-z]+\\.([a-z]+)?$/i")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     @Column(nullable = false)
     private String email;
 
     @OneToMany
-        //(mappedBy = "usuario")
     private Collection<Tarefa> tarefas = new ArrayList<>();
     
     public String getNome() {

@@ -13,9 +13,14 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    <!-- DEFINIMOS O THEME A SER UTILIZADO PELO PRIMEFACES -->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
     <session-config>
-        <session-timeout>
-            30
+        <session-timeout> 
+            40
         </session-timeout>
     </session-config>
     <welcome-file-list>
