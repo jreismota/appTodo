@@ -73,6 +73,7 @@ public class TarefaService {
         }
         tarefa.setUsuario(userBd);
         tarefa.setDataAlteracao(new Date());
+        tarefa.setDataCriacao(tarefaBd.getDataCriacao());
         entityManager.merge(tarefa);
         return tarefa;
     }

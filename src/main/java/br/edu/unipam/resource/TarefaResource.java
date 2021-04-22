@@ -59,7 +59,7 @@ public class TarefaResource {
     }
     
     @PUT
-    @Path("update/{id}") //localhost:8081/appTodo/api/v1/tarefa/new
+    @Path("update/{id}") //localhost:8081/appTodo/api/v1/tarefa/update/1
     public Response atualizarTarefa(Tarefa tarefa, @PathParam("id") long idUser)
     {
         Tarefa tarefaSalva  = tarefaService.editar(tarefa, idUser);
@@ -68,14 +68,14 @@ public class TarefaResource {
 
     @DELETE
     @Path("delete/{id}")
-    public Response excluirTarefa(@PathParam("id") long idTarefa)
+    public Response excluirTarefa(@PathParam("id") long id)
     {
-        String retorno = tarefaService.remover(idTarefa);
+        String retorno = tarefaService.remover(id);
         if (retorno == null)
         {
             return Response.ok().build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).entity("Registro não encontrado").build();
+        return Response.status(Response.Status.NOT_FOUND).entity("Registro não encontrado").build();
     } 
     
     

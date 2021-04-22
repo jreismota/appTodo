@@ -16,13 +16,8 @@
                         <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_email}" for="email" />
                         <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.CreateUsuarioTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_email}"/>
-<!--                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataCriacao}" for="dataCriacao" />
-                        <p:inputText id="dataCriacao" value="#{usuarioController.selected.dataCriacao}" title="#{bundle.CreateUsuarioTitle_dataCriacao}" />-->
-                <p:outputLabel for="popupConvertDateTime" value="Popup (f:convertDateTime)"/>
-                <p:datePicker id="popupConvertDateTime" value="#{usuarioController.selected.dataAlteracao}"
-                              pattern="MM/dd/yyyy">
-                    <f:convertDateTime pattern="MM/dd/yyyy" type="localDate"/>
-                </p:datePicker>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataCriacao}" for="dataCriacao" />
+                        <p:inputText id="dataCriacao" value="#{usuarioController.selected.dataCriacao}" title="#{bundle.CreateUsuarioTitle_dataCriacao}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataAlteracao}" for="dataAlteracao" />
                         <p:inputText id="dataAlteracao" value="#{usuarioController.selected.dataAlteracao}" title="#{bundle.CreateUsuarioTitle_dataAlteracao}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_id}" for="id" />

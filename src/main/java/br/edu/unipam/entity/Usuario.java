@@ -29,11 +29,13 @@ public class Usuario extends AbstractEntity implements Serializable {
 
     public static final String GET_ALL_USERS = "Usuario.getAllUsers";
 
-    private String nome;
-    
     @NotEmpty
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    private String nome;
+    
+    @NotEmpty (message = "E-mail é obrigatório")
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Formato de e-mail inválido")
     @Column(nullable = false)
     private String email;
 

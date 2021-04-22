@@ -18,12 +18,13 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+
 @Named("tarefaController")
 @SessionScoped
 public class TarefaController implements Serializable {
 
-    @EJB
-    private br.edu.unipam.apptodo.TarefaFacade ejbFacade;
+
+    @EJB private br.edu.unipam.apptodo.TarefaFacade ejbFacade;
     private List<Tarefa> items = null;
     private Tarefa selected;
 
@@ -120,7 +121,7 @@ public class TarefaController implements Serializable {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Tarefa.class)
+    @FacesConverter(forClass=Tarefa.class)
     public static class TarefaControllerConverter implements Converter {
 
         @Override
@@ -128,7 +129,7 @@ public class TarefaController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TarefaController controller = (TarefaController) facesContext.getApplication().getELResolver().
+            TarefaController controller = (TarefaController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "tarefaController");
             return controller.getTarefa(getKey(value));
         }
