@@ -6,6 +6,7 @@
 package br.edu.unipam.service;
 
 import br.edu.unipam.entity.Usuario;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -20,7 +21,7 @@ import javax.transaction.Transactional;
  * @author josereis
  */
 @Transactional
-public class UsuarioService {
+public class UsuarioService  implements Serializable {
 
     @PersistenceContext(name = "pu_todo")
     private EntityManager entityManager;

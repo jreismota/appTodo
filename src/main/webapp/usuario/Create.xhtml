@@ -16,12 +16,6 @@
                         <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_email}" for="email" />
                         <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.CreateUsuarioTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_email}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataCriacao}" for="dataCriacao" />
-                        <p:inputText id="dataCriacao" value="#{usuarioController.selected.dataCriacao}" title="#{bundle.CreateUsuarioTitle_dataCriacao}" />
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataAlteracao}" for="dataAlteracao" />
-                        <p:inputText id="dataAlteracao" value="#{usuarioController.selected.dataAlteracao}" title="#{bundle.CreateUsuarioTitle_dataAlteracao}" />
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{usuarioController.selected.id}" title="#{bundle.CreateUsuarioTitle_id}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>

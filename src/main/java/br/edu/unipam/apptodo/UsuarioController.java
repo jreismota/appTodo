@@ -3,6 +3,7 @@ package br.edu.unipam.apptodo;
 import br.edu.unipam.entity.Usuario;
 import br.edu.unipam.apptodo.util.JsfUtil;
 import br.edu.unipam.apptodo.util.JsfUtil.PersistAction;
+import br.edu.unipam.service.UsuarioService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,23 +12,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
 
-
     @EJB private br.edu.unipam.apptodo.UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
 
+    @Inject
+    private UsuarioService usuarioService;
+    
     public UsuarioController() {
     }
 
@@ -76,7 +81,9 @@ public class UsuarioController implements Serializable {
 
     public List<Usuario> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+//            items = getFacade().findAll();
+            items = usuarioService.listarTodos();
+
         }
         return items;
     }
@@ -85,7 +92,11 @@ public class UsuarioController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
+                if (persistAction == PersistAction.CREATE)
+                {
+                    selected = usuarioService.salvarUsuario(selected);
+                }
+                else if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);

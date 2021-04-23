@@ -58,6 +58,8 @@ public class Usuario extends AbstractEntity implements Serializable {
         this.email = Email;
     }
 
-   
+   public String toString() {
+    return id + ", " + nome;
+}
     
 }
