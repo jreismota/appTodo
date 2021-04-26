@@ -8,6 +8,7 @@ package br.edu.unipam.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.validation.constraints.Pattern;
  * @author josereis
  */
 @Entity
-@NamedQuery(name =  Usuario.GET_ALL_USERS, query = "select u from Usuario u order by u.nome")
+@NamedQuery(name = Usuario.GET_ALL_USERS, query = "select u from Usuario u order by u.nome")
 public class Usuario extends AbstractEntity implements Serializable {
 
     public static final String GET_ALL_USERS = "Usuario.getAllUsers";
@@ -32,8 +33,8 @@ public class Usuario extends AbstractEntity implements Serializable {
     @NotEmpty
     @NotNull
     private String nome;
-    
-    @NotEmpty (message = "E-mail é obrigatório")
+
+    @NotEmpty(message = "E-mail é obrigatório")
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", message = "Formato de e-mail inválido")
     @Column(nullable = false)
@@ -49,7 +50,7 @@ public class Usuario extends AbstractEntity implements Serializable {
     public void setTarefas(Collection<Tarefa> tarefas) {
         this.tarefas = tarefas;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -66,8 +67,36 @@ public class Usuario extends AbstractEntity implements Serializable {
         this.email = Email;
     }
 
-   public String toString() {
-    return id + ", " + nome;
-}
-    
+    public String toString() {
+        return id + ", " + nome;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return true;
+    }
+
 }
