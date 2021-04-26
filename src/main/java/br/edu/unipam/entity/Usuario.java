@@ -41,6 +41,14 @@ public class Usuario extends AbstractEntity implements Serializable {
 
     @OneToMany
     private Collection<Tarefa> tarefas = new ArrayList<>();
+
+    public Collection<Tarefa> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(Collection<Tarefa> tarefas) {
+        this.tarefas = tarefas;
+    }
     
     public String getNome() {
         return nome;

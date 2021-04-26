@@ -3,6 +3,7 @@ package br.edu.unipam.apptodo;
 import br.edu.unipam.entity.Tarefa;
 import br.edu.unipam.apptodo.util.JsfUtil;
 import br.edu.unipam.apptodo.util.JsfUtil.PersistAction;
+import br.edu.unipam.service.TarefaService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 
 @Named("tarefaController")
@@ -24,7 +26,9 @@ import javax.faces.convert.FacesConverter;
 public class TarefaController implements Serializable {
 
 
-    @EJB private br.edu.unipam.apptodo.TarefaFacade ejbFacade;
+//    @EJB private br.edu.unipam.apptodo.TarefaFacade ejbFacade;
+    @Inject
+    private TarefaService tarefaService;
     private List<Tarefa> items = null;
     private Tarefa selected;
 
@@ -45,9 +49,9 @@ public class TarefaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private TarefaFacade getFacade() {
-        return ejbFacade;
-    }
+//    private TarefaFacade getFacade() {
+//        return ejbFacade;
+//    }
 
     public Tarefa prepareCreate() {
         selected = new Tarefa();
@@ -76,7 +80,7 @@ public class TarefaController implements Serializable {
 
     public List<Tarefa> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = tarefaService.listar();
         }
         return items;
     }
@@ -85,10 +89,12 @@ public class TarefaController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                if (persistAction == persistAction.CREATE)
+                    selected = tarefaService.salvar(selected, selected.getUsuario().getId());
+                else if (persistAction != PersistAction.DELETE) {
+                    selected = tarefaService.editar(selected, selected.getUsuario().getId());
                 } else {
-                    getFacade().remove(selected);
+                    tarefaService.remover(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -110,15 +116,15 @@ public class TarefaController implements Serializable {
     }
 
     public Tarefa getTarefa(java.lang.Long id) {
-        return getFacade().find(id);
+        return tarefaService.localizarPorId(id);
     }
 
     public List<Tarefa> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return tarefaService.listar();
     }
 
     public List<Tarefa> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return tarefaService.listar();
     }
 
     @FacesConverter(forClass=Tarefa.class)

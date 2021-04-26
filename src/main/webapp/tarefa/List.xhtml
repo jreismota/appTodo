@@ -43,17 +43,23 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_dataPrevista}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dataPrevista}"/>
+                            <h:outputText value="#{item.dataPrevista}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_dataTermino}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dataTermino}"/>
+                            <h:outputText value="#{item.dataTermino}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTarefaTitle_dataCriacao}"/>
+                                <h:outputText value="#{bundle.ListTarefaTitle_dataCriacao}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                                </h:outputText>
                             </f:facet>
                             <h:outputText value="#{item.dataCriacao}"/>
                         </p:column>
@@ -61,7 +67,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_dataAlteracao}"/>
                             </f:facet>
-                            <h:outputText value="#{item.dataAlteracao}"/>
+                            <h:outputText value="#{item.dataAlteracao}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

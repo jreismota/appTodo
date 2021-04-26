@@ -19,17 +19,19 @@
                                            itemValue="#{usuarioItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_descricao}" for="descricao" />
-                        <p:inputText id="descricao" value="#{tarefaController.selected.descricao}" title="#{bundle.CreateTarefaTitle_descricao}" />
+                        <p:inputText id="descricao" value="#{tarefaController.selected.descricao}" title="#{bundle.CreateTarefaTitle_descricao}" validatorMessage="Deve ter no mínimo 10 caracteres">
+                            <f:validateLength minimum="10"/>
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_dataPrevista}" for="dataPrevista" />
-                        <p:inputText id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.CreateTarefaTitle_dataPrevista}" />
+                        <p:calendar id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.CreateTarefaTitle_dataPrevista}" showOn="button" />
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_dataTermino}" for="dataTermino" />
-                        <p:inputText id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.CreateTarefaTitle_dataTermino}" />
-                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataCriacao}" for="dataCriacao" />
+                        <p:calendar id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.CreateTarefaTitle_dataTermino}" showOn="button" />
+<!--                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataCriacao}" for="dataCriacao" />
                         <p:inputText id="dataCriacao" value="#{tarefaController.selected.dataCriacao}" title="#{bundle.CreateTarefaTitle_dataCriacao}" />
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_dataAlteracao}" for="dataAlteracao" />
                         <p:inputText id="dataAlteracao" value="#{tarefaController.selected.dataAlteracao}" title="#{bundle.CreateTarefaTitle_dataAlteracao}" />
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.CreateTarefaTitle_id}" />
+                        <p:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.CreateTarefaTitle_id}" />-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tarefaController.create}" value="#{bundle.Save}" update="display,:TarefaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TarefaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TarefaCreateDialog.hide()"/>

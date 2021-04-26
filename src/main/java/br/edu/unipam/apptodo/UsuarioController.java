@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -26,7 +25,7 @@ import javax.inject.Inject;
 @SessionScoped
 public class UsuarioController implements Serializable {
 
-    @EJB private br.edu.unipam.apptodo.UsuarioFacade ejbFacade;
+    //@EJB private br.edu.unipam.apptodo.UsuarioFacade ejbFacade;
     private List<Usuario> items = null;
     private Usuario selected;
 
@@ -50,9 +49,9 @@ public class UsuarioController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private UsuarioFacade getFacade() {
-        return ejbFacade;
-    }
+//    private UsuarioFacade getFacade() {
+//        return ejbFacade;
+//    }
 
     public Usuario prepareCreate() {
         selected = new Usuario();
@@ -97,9 +96,11 @@ public class UsuarioController implements Serializable {
                     selected = usuarioService.salvarUsuario(selected);
                 }
                 else if (persistAction != PersistAction.DELETE) {
-                    getFacade().edit(selected);
+                    selected = usuarioService.editar(selected);
+//                    getFacade().edit(selected);
                 } else {
-                    getFacade().remove(selected);
+                    usuarioService.remover(selected.getId());
+//                    getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -121,15 +122,15 @@ public class UsuarioController implements Serializable {
     }
 
     public Usuario getUsuario(java.lang.Long id) {
-        return getFacade().find(id);
+        return usuarioService.localizarPorId(id);
     }
 
     public List<Usuario> getItemsAvailableSelectMany() {
-        return getFacade().findAll();
+        return usuarioService.listarTodos();
     }
 
     public List<Usuario> getItemsAvailableSelectOne() {
-        return getFacade().findAll();
+        return usuarioService.listarTodos();
     }
 
     @FacesConverter(forClass=Usuario.class)

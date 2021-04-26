@@ -14,6 +14,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 /**
@@ -43,7 +44,10 @@ public class UsuarioService  implements Serializable {
     public void remover(Long id) {
         Usuario user = localizarPorId(id);
         if (user != null) {
-            entityManager.remove(user);
+//            entityManager.remove(user);
+            Query q = entityManager.createNativeQuery("Delete from usuario u where u.id = ?");
+            q.setParameter(1, id);
+            q.executeUpdate();
         }
     }
 

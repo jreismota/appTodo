@@ -7,11 +7,14 @@ package br.edu.unipam.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,10 +31,12 @@ public class Tarefa extends AbstractEntity implements Serializable {
     
     @NotNull
     @JsonbDateFormat(locale = "yyyy-mm-dd")
-    private LocalDate DataPrevista;
+    @Temporal(TemporalType.DATE)
+    private Date DataPrevista;
     
     @JsonbDateFormat(locale = "yyyy-mm-dd")
-    private LocalDate DataTermino;
+    @Temporal(TemporalType.DATE)
+    private Date DataTermino;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="IdUsuario")
@@ -53,19 +58,19 @@ public class Tarefa extends AbstractEntity implements Serializable {
         this.Descricao = Descricao;
     }
 
-    public LocalDate getDataPrevista() {
+    public Date getDataPrevista() {
         return DataPrevista;
     }
 
-    public void setDataPrevista(LocalDate DataPrevista) {
+    public void setDataPrevista(Date DataPrevista) {
         this.DataPrevista = DataPrevista;
     }
 
-    public LocalDate getDataTermino() {
+    public Date getDataTermino() {
         return DataTermino;
     }
 
-    public void setDataTermino(LocalDate DataTermino) {
+    public void setDataTermino(Date DataTermino) {
         this.DataTermino = DataTermino;
     }
 

@@ -7,6 +7,7 @@ package br.edu.unipam.service;
 
 import br.edu.unipam.entity.Tarefa;
 import br.edu.unipam.entity.Usuario;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ import javax.transaction.Transactional;
  * Se der erro, rollback na transação; senão
  */
 @Transactional
-public class TarefaService {
+public class TarefaService  implements Serializable {
 
     @PersistenceContext(name = "pu_todo")
     private EntityManager entityManager;
