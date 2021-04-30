@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_usuario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.usuario}"/>
+                            <h:outputText value="#{item.usuario.nome}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -40,6 +40,7 @@
                             <h:outputText value="#{item.descricao}"/>
                         </p:column>
                         <p:column>
+                            
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_dataPrevista}"/>
                             </f:facet>

@@ -15,6 +15,8 @@
                         <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="Campo obrigatório"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_email}" for="email" />
                         <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundle.CreateUsuarioTitle_email}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_email}"/>
+                        <p:outputLabel value="Senha" for="senha" />
+                        <p:inputText type="password" id="senha" value="#{usuarioController.selected.senha}" title="#{bundle.CreateUsuarioTitle_senha}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_senha}"></p:inputText>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>

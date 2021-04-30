@@ -8,6 +8,7 @@ package br.edu.unipam.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -72,6 +73,31 @@ public class Tarefa extends AbstractEntity implements Serializable {
 
     public void setDataTermino(Date DataTermino) {
         this.DataTermino = DataTermino;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tarefa other = (Tarefa) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
   

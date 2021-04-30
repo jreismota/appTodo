@@ -21,16 +21,12 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditTarefaLabel_descricao}" for="descricao" />
                         <p:inputText id="descricao" value="#{tarefaController.selected.descricao}" title="#{bundle.EditTarefaTitle_descricao}" />
-                        <p:outputLabel value="#{bundle.EditTarefaLabel_dataPrevista}" for="dataPrevista" />
-                        <p:inputText id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.EditTarefaTitle_dataPrevista}" />
-                        <p:outputLabel value="#{bundle.EditTarefaLabel_dataTermino}" for="dataTermino" />
-                        <p:inputText id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.EditTarefaTitle_dataTermino}" />
-                        <p:outputLabel value="#{bundle.EditTarefaLabel_dataCriacao}" for="dataCriacao" />
-                        <p:inputText id="dataCriacao" value="#{tarefaController.selected.dataCriacao}" title="#{bundle.EditTarefaTitle_dataCriacao}" />
-                        <p:outputLabel value="#{bundle.EditTarefaLabel_dataAlteracao}" for="dataAlteracao" />
-                        <p:inputText id="dataAlteracao" value="#{tarefaController.selected.dataAlteracao}" title="#{bundle.EditTarefaTitle_dataAlteracao}" />
+                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataPrevista}" for="dataPrevista" />
+                        <p:calendar id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.CreateTarefaTitle_dataPrevista}" showOn="button" />
+                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataTermino}" for="dataTermino" />
+                        <p:calendar id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.CreateTarefaTitle_dataTermino}" showOn="button" />
                         <p:outputLabel value="#{bundle.EditTarefaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.EditTarefaTitle_id}" />
+                        <p:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.EditTarefaTitle_id}" disabled="true" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tarefaController.update}" value="#{bundle.Save}" update="display,:TarefaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TarefaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TarefaEditDialog.hide()"/>

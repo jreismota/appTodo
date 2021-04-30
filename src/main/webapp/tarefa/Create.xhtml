@@ -26,12 +26,6 @@
                         <p:calendar id="dataPrevista" value="#{tarefaController.selected.dataPrevista}" title="#{bundle.CreateTarefaTitle_dataPrevista}" showOn="button" />
                         <p:outputLabel value="#{bundle.CreateTarefaLabel_dataTermino}" for="dataTermino" />
                         <p:calendar id="dataTermino" value="#{tarefaController.selected.dataTermino}" title="#{bundle.CreateTarefaTitle_dataTermino}" showOn="button" />
-<!--                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataCriacao}" for="dataCriacao" />
-                        <p:inputText id="dataCriacao" value="#{tarefaController.selected.dataCriacao}" title="#{bundle.CreateTarefaTitle_dataCriacao}" />
-                        <p:outputLabel value="#{bundle.CreateTarefaLabel_dataAlteracao}" for="dataAlteracao" />
-                        <p:inputText id="dataAlteracao" value="#{tarefaController.selected.dataAlteracao}" title="#{bundle.CreateTarefaTitle_dataAlteracao}" />
-                        <p:outputLabel value="#{bundle.CreateTarefaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{tarefaController.selected.id}" title="#{bundle.CreateTarefaTitle_id}" />-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{tarefaController.create}" value="#{bundle.Save}" update="display,:TarefaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TarefaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="TarefaCreateDialog.hide()"/>

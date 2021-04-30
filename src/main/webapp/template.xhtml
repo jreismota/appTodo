@@ -26,6 +26,7 @@
                         <p:menuitem value="Tarefa" outcome="/tarefa/List.xhtml" />
                         <p:menuitem value="Usuario" outcome="/usuario/List.xhtml" />
                     </p:submenu>
+                    <p:menuitem value="Logout" action="#{autenticacao.logout}" icon="pi pi-sign-out" rendered="#{not empty usuarioAutenticado}"/>
                 </p:menubar>
             </h:form>
             <!--            </p:layoutUnit>

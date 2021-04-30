@@ -70,5 +70,14 @@ public class UsuarioService  implements Serializable {
         return entityManager.createNamedQuery(Usuario.GET_ALL_USERS, Usuario.class).getResultList();
     }
     
+        //Listar Todos os usuários
+    public Usuario verificarLogin (String email, String senha)
+    {
+        return entityManager.createQuery("select u from Usuario u where u.email = :pEmail and u.senha = :pSenha", Usuario.class)
+                .setParameter("pEmail", email)
+                .setParameter("pSenha", senha)
+                .getSingleResult();
+    }
+    
     //ToDo: Salvar usuario
 }

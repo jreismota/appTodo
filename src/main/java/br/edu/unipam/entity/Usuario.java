@@ -40,6 +40,16 @@ public class Usuario extends AbstractEntity implements Serializable {
     @Column(nullable = false)
     private String email;
 
+    private String senha;
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     @OneToMany
     private Collection<Tarefa> tarefas = new ArrayList<>();
 
@@ -68,7 +78,7 @@ public class Usuario extends AbstractEntity implements Serializable {
     }
 
     public String toString() {
-        return id + ", " + nome;
+        return id + " - " + nome;
     }
 
     @Override
@@ -91,9 +101,6 @@ public class Usuario extends AbstractEntity implements Serializable {
         }
         final Usuario other = (Usuario) obj;
         if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
         return true;
