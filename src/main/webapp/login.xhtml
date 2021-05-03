@@ -20,11 +20,11 @@
 
                         <h:outputLabel value="Email:" for="email" />
                         <h:inputText id="email" value="#{autenticacao.email}"
-                            required="true">
+                                     required="true" requiredMessage="E-mail obrigatório">
                             <f:passThroughAttribute name="type" value="email" />
                         </h:inputText>
 
-                        <h:message for="email" id="messageEmail" />
+                        <h:message for="email" id="messageEmail"  />
 
                         <h:outputLabel value="Senha:" for="senha" />
                         <h:inputText id="senha" value="#{autenticacao.senha}"
