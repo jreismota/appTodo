@@ -1,6 +1,6 @@
 package br.edu.unipam.apptodo.util;
 
-import br.edu.unipam.entity.Usuario;
+import br.edu.unipam.apptodo.entity.Usuario;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +26,7 @@ public class AutenticacaoPhaseListener implements PhaseListener {
 
         ExternalContext ec = fc.getExternalContext();
 
-        if (!fc.getViewRoot().getViewId().contains("login.xhtml")) {
+        if (!nomePagina.contains("login.xhtml")) {
             HttpSession session = (HttpSession) ec.getSession(true);
             Usuario usuario = (Usuario) session.getAttribute("usuarioAutenticado");
 
@@ -35,6 +35,16 @@ public class AutenticacaoPhaseListener implements PhaseListener {
                     ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
                 } catch (IOException ex) {
                     Logger.getLogger(AutenticacaoPhaseListener.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else if (nomePagina.contains("admin")) {
+                if (usuario.getPerfil().getId() != 1) {
+                    try {
+                        ec.redirect(ec.getRequestContextPath() + "/faces/login.xhtml");
+                    } catch (IOException ex) {
+                        Logger.getLogger(AutenticacaoPhaseListener.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
             }
         }

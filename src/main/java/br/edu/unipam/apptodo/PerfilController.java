@@ -1,9 +1,9 @@
 package br.edu.unipam.apptodo;
 
-import br.edu.unipam.apptodo.entity.Tarefa;
+import br.edu.unipam.apptodo.entity.Perfil;
+import br.edu.unipam.apptodo.service.PerfilService;
 import br.edu.unipam.apptodo.util.JsfUtil;
 import br.edu.unipam.apptodo.util.JsfUtil.PersistAction;
-import br.edu.unipam.apptodo.service.TarefaService;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,26 +20,23 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
-
-@Named("tarefaController")
+@Named("perfilController")
 @SessionScoped
-public class TarefaController implements Serializable {
+public class PerfilController implements Serializable {
 
-
-//    @EJB private br.edu.unipam.apptodo.TarefaFacade ejbFacade;
     @Inject
-    private TarefaService tarefaService;
-    private List<Tarefa> items = null;
-    private Tarefa selected;
+    private PerfilService perfilService;
+    private List<Perfil> items = null;
+    private Perfil selected;
 
-    public TarefaController() {
+    public PerfilController() {
     }
 
-    public Tarefa getSelected() {
+    public Perfil getSelected() {
         return selected;
     }
 
-    public void setSelected(Tarefa selected) {
+    public void setSelected(Perfil selected) {
         this.selected = selected;
     }
 
@@ -49,38 +46,35 @@ public class TarefaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-//    private TarefaFacade getFacade() {
-//        return ejbFacade;
-//    }
 
-    public Tarefa prepareCreate() {
-        selected = new Tarefa();
+    public Perfil prepareCreate() {
+        selected = new Perfil();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TarefaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PerfilCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("TarefaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PerfilUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("TarefaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PerfilDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Tarefa> getItems() {
+    public List<Perfil> getItems() {
         if (items == null) {
-            items = tarefaService.listar();
+            items = perfilService.listarTodos();
         }
         return items;
     }
@@ -89,12 +83,13 @@ public class TarefaController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction == persistAction.CREATE)
-                    selected = tarefaService.salvar(selected, selected.getUsuario().getId());
+                if (persistAction == persistAction.CREATE){
+                    selected = perfilService.salvarPerfil(selected);
+                }
                 else if (persistAction != PersistAction.DELETE) {
-                    selected = tarefaService.editar(selected, selected.getUsuario().getId());
+                    selected = perfilService.editar(selected);
                 } else {
-                    tarefaService.remover(selected.getId());
+                    perfilService.remover(selected.getId());
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
@@ -115,38 +110,38 @@ public class TarefaController implements Serializable {
         }
     }
 
-    public Tarefa getTarefa(java.lang.Long id) {
-        return tarefaService.localizarPorId(id);
+    public Perfil getPerfil(java.lang.Integer id) {
+        return perfilService.localizarPorId(id);
     }
 
-    public List<Tarefa> getItemsAvailableSelectMany() {
-        return tarefaService.listar();
+    public List<Perfil> getItemsAvailableSelectMany() {
+                return perfilService.listarTodos();
     }
 
-    public List<Tarefa> getItemsAvailableSelectOne() {
-        return tarefaService.listar();
+    public List<Perfil> getItemsAvailableSelectOne() {
+                return perfilService.listarTodos();
     }
 
-    @FacesConverter(forClass=Tarefa.class)
-    public static class TarefaControllerConverter implements Converter {
+    @FacesConverter(forClass = Perfil.class)
+    public static class PerfilControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TarefaController controller = (TarefaController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tarefaController");
-            return controller.getTarefa(getKey(value));
+            PerfilController controller = (PerfilController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "perfilController");
+            return controller.getPerfil(getKey(value));
         }
 
-        java.lang.Long getKey(String value) {
-            java.lang.Long key;
-            key = Long.valueOf(value);
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.Long value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
@@ -157,11 +152,11 @@ public class TarefaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Tarefa) {
-                Tarefa o = (Tarefa) object;
+            if (object instanceof Perfil) {
+                Perfil o = (Perfil) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Tarefa.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Perfil.class.getName()});
                 return null;
             }
         }

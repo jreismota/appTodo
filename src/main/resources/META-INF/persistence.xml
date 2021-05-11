@@ -5,6 +5,7 @@
     <jta-data-source>jdbc/Todo</jta-data-source>
     <class>teste.Tarefa</class>
     <class>teste.Usuario</class>
+    <class>br.edu.unipam.apptodo.entity.Perfil</class>
     <properties>
       <!--      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/todo"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

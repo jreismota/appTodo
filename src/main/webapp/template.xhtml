@@ -24,7 +24,8 @@
                     <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
                     <p:submenu label="#{bundle.Maintenance}">
                         <p:menuitem value="Tarefa" outcome="/tarefa/List.xhtml" />
-                        <p:menuitem value="Usuario" outcome="/usuario/List.xhtml" />
+                        <p:menuitem value="Usuario" outcome="/admin/usuario/List" rendered="#{usuarioAutenticado.perfil.id == 1}" />
+                        <p:menuitem value="Perfil" outcome="/perfil/List.xhtml" />
                     </p:submenu>
                     <p:menuitem value="Logout" action="#{autenticacao.logout}" icon="pi pi-sign-out" rendered="#{not empty usuarioAutenticado}"/>
                 </p:menubar>

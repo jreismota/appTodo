@@ -6,8 +6,8 @@
 package br.edu.unipam.apptodo;
 
 import br.edu.unipam.apptodo.util.JsfUtil;
-import br.edu.unipam.entity.Usuario;
-import br.edu.unipam.service.UsuarioService;
+import br.edu.unipam.apptodo.entity.Usuario;
+import br.edu.unipam.apptodo.service.UsuarioService;
 import java.io.Serializable;
 import java.util.Enumeration;
 import javax.enterprise.context.SessionScoped;
@@ -29,44 +29,35 @@ public class AutenticacaoController implements Serializable {
     public AutenticacaoController() {
     }
 
-    
     public String efetuarLogin() {
         System.out.println("efetuando login " + email + " " + senha);
 
         try {
-        usuario = usuarioService.verificarLogin(email, senha);
-        }catch (Exception e)
-        {
+            usuario = usuarioService.verificarLogin(email, senha);
+        } catch (Exception e) {
             JsfUtil.addErrorMessage("Usuário não encontrado");
             return "login.xhtml";
         }
-        
 
         if (usuario == null) {
             JsfUtil.addErrorMessage("Login ou senha não correspondem");
             return "login.xhtml";
         } else {
             // USE MD5!!!
-            if (senha.equals(usuario.getSenha())) {
+            HttpSession session;
 
-                HttpSession session;
+            FacesContext ctx = FacesContext.getCurrentInstance();
+            session = (HttpSession) ctx.getExternalContext().getSession(false);
+            session.setAttribute("usuarioAutenticado", usuario);
 
-                FacesContext ctx = FacesContext.getCurrentInstance();
-                session = (HttpSession) ctx.getExternalContext().getSession(false);
-                session.setAttribute("usuarioAutenticado", usuario);
-
-                return "index.xhtml";
-            } else {
-                JsfUtil.addErrorMessage("Login ou senha não correspondem");
-                return "login.xhtml";
-            }
+            return "index.xhtml";
         }
 
     }
 
     public String logout() {
         HttpSession session;
-        
+
         FacesContext ctx = FacesContext.getCurrentInstance();
         session = (HttpSession) ctx.getExternalContext().getSession(false);
         session.setAttribute("usuarioAutenticado", null);

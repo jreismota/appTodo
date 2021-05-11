@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unipam.service;
+package br.edu.unipam.apptodo.service;
 
-import br.edu.unipam.entity.Tarefa;
-import br.edu.unipam.entity.Usuario;
+import br.edu.unipam.apptodo.entity.Tarefa;
+import br.edu.unipam.apptodo.entity.Usuario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

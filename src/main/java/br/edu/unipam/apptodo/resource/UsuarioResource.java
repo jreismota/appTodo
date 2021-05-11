@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unipam.resource;
+package br.edu.unipam.apptodo.resource;
 
-import br.edu.unipam.entity.Usuario;
-import br.edu.unipam.service.UsuarioService;
+import br.edu.unipam.apptodo.entity.Usuario;
+import br.edu.unipam.apptodo.service.UsuarioService;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;

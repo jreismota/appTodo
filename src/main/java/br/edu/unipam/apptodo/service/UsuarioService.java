@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.unipam.service;
+package br.edu.unipam.apptodo.service;
 
-import br.edu.unipam.entity.Usuario;
+import br.edu.unipam.apptodo.entity.Usuario;
+import br.edu.unipam.apptodo.util.Criptografia;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,6 +30,8 @@ public class UsuarioService  implements Serializable {
 
     //inserir
     public Usuario salvarUsuario(Usuario usuario) {
+        String senhaCripto = Criptografia.md5(usuario.getSenha());
+        usuario.setSenha(senhaCripto);
         usuario.setDataCriacao(new Date());
         entityManager.persist(usuario);
         return usuario;
@@ -56,6 +59,8 @@ public class UsuarioService  implements Serializable {
         Usuario userBd = localizarPorId(usuario.getId());
 
         if (userBd != null) {
+            String senhaCripto = Criptografia.md5(usuario.getSenha());
+            usuario.setSenha(senhaCripto);
             usuario.setDataAlteracao(new Date());
             entityManager.merge(usuario);
             return usuario;
@@ -73,9 +78,15 @@ public class UsuarioService  implements Serializable {
         //Listar Todos os usuários
     public Usuario verificarLogin (String email, String senha)
     {
+        String senhaCripto = senha;
+        if (!email.equals("teste@teste.com"))
+        {
+            senhaCripto = Criptografia.md5(senha);
+        }
+        
         return entityManager.createQuery("select u from Usuario u where u.email = :pEmail and u.senha = :pSenha", Usuario.class)
                 .setParameter("pEmail", email)
-                .setParameter("pSenha", senha)
+                .setParameter("pSenha", senhaCripto)
                 .getSingleResult();
     }
     

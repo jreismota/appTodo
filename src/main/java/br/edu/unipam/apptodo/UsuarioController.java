@@ -1,9 +1,9 @@
 package br.edu.unipam.apptodo;
 
-import br.edu.unipam.entity.Usuario;
+import br.edu.unipam.apptodo.entity.Usuario;
 import br.edu.unipam.apptodo.util.JsfUtil;
 import br.edu.unipam.apptodo.util.JsfUtil.PersistAction;
-import br.edu.unipam.service.UsuarioService;
+import br.edu.unipam.apptodo.service.UsuarioService;
 
 import java.io.Serializable;
 import java.util.List;
