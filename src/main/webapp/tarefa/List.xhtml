@@ -16,6 +16,65 @@
         <ui:define name="body">
             <h:form id="TarefaListForm">
                 <p:panel header="#{bundle.ListTarefaTitle}">
+                    <div class="p-d-flex p-jc-between">
+                        <div>
+                            <h5>Standard</h5>
+                            <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2">
+                                <p:dataExporter type="xls" target="datalist" fileName="tasks"
+                                                postProcessor="#{tarefaController.postProcessXLS}"/>
+                            </p:commandButton>
+
+                            <!--                <p:commandButton value="XLXS" styleClass="p-mr-2 p-mb-2">
+                                                <p:dataExporter type="xlsxstream" target="tbl" fileName="tasks"/>
+                                            </p:commandButton>-->
+
+                            <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
+                                <p:dataExporter type="pdf" target="datalist" fileName="tasks"
+                                                preProcessor="#{tarefaController.preProcessPDF}"/>
+                            </p:commandButton>
+
+                            <p:commandButton value="CSV" styleClass="p-mr-2 p-mb-2">
+                                <p:dataExporter type="csv" target="datalist" fileName="tasks" />
+                            </p:commandButton>
+
+                            <p:commandButton value="XML" styleClass="p-mr-2 p-mb-2">
+                                <p:dataExporter type="xml" target="datalist" fileName="tasks"/>
+                            </p:commandButton>
+
+                            <p:commandButton value="XML" styleClass="p-mr-2 p-mb-2">
+                                <p:dataExporter type="xml" target="datalist" fileName="tasks"/>
+                            </p:commandButton>
+
+                            <!--                <p:commandButton value="TXT" styleClass="p-mr-2 p-mb-2">
+                                                <p:dataExporter type="txt" target="tbl" fileName="tasks" exporter="#{dataExporterView.textExporter}"/>
+                                            </p:commandButton>-->
+                        </div>
+
+                        <div>
+                            <h5>Page Only</h5>
+                            <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                                <p:dataExporter type="xls" target="datalist" fileName="tasks" pageOnly="true"/>
+                            </p:commandButton>
+
+                            <!--                <p:commandButton value="XLXS" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                                                <p:dataExporter type="xlsxstream" target="datalist" fileName="tasks" pageOnly="true"/>
+                                            </p:commandButton>-->
+
+                            <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                                <p:dataExporter type="pdf" target="datalist" fileName="tasks" pageOnly="true" options="#{tarefaController.pdfOpt}"/>
+                            </p:commandButton>
+
+                            <p:commandButton value="CSV" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                                <p:dataExporter type="csv" target="datalist" fileName="tasks" pageOnly="true"/>
+                            </p:commandButton>
+
+                            <h:commandButton id="itext" value="Itext JSF" action="#{tarefaController.createCustomPdf}" class="p-mr-2 p-mb-2 ui-button-outlined"/>
+                            <!--                <p:commandButton value="TXT" styleClass="p-mr-2 p-mb-2 ui-button-outlined">
+                                                <p:dataExporter type="txt" target="tbl" fileName="tasks" pageOnly="true"
+                                                                exporter="#{dataExporterView.textExporter}"/>
+                                            </p:commandButton>-->
+                        </div>
+                    </div>
                     <p:dataTable id="datalist" value="#{tarefaController.items}" var="item"
                                  selectionMode="single" selection="#{tarefaController.selected}"
                                  paginator="true"
@@ -40,7 +99,7 @@
                             <h:outputText value="#{item.descricao}"/>
                         </p:column>
                         <p:column>
-                            
+
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_dataPrevista}"/>
                             </f:facet>
@@ -72,7 +131,7 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column exportable="false">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTarefaTitle_id}"/>
                             </f:facet>
